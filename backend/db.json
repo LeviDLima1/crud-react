@@ -1,22 +1,28 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "email": "johndoe@example.com",
       "role": "admin"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jane Smith",
       "email": "janesmith@example.com",
       "role": "user"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Mike Johnson",
       "email": "mikejohnson@example.com",
       "role": "guest"
+    },
+    {
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "role": "Administrador",
+      "id": "5624"
     }
   ]
 }

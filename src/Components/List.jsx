@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../routes/api'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 function ListView() {
 
@@ -17,6 +18,8 @@ function ListView() {
             })
 
     }, [])
+
+    const navigate = useNavigate()
 
     return (
         <>
@@ -40,7 +43,7 @@ function ListView() {
                                 <td>{user.role}</td>
                                 
                                     <td>
-                                        <Button  variant='outline-primary'>Editar</Button>
+                                        <Button  variant='outline-primary' onClick={() => navigate(`/editlist/${user.id}`)}>Editar</Button>
                                         <Button variant='outline-danger'>Deletar</Button>
                                     </td>
                             </tr>
