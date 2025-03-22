@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 function ListView() {
 
     const [Usuarios, setUsuarios] = useState([])
+
     console.log(Usuarios)
+
     useEffect(() => {
         api.get('/users')
             .then(response => {
@@ -17,9 +19,22 @@ function ListView() {
                 console.error(error)
             })
 
+            
+            
     }, [])
 
     const navigate = useNavigate()
+
+    async function deleteUser(id) {
+        await api.delete(`/users/${id}`)
+            .then(() => {
+                setUsuarios(Usuarios.filter(user => user.id !== id));
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
 
     return (
         <>
@@ -29,23 +44,21 @@ function ListView() {
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>Cargo</th>
-                        <td colSpan={2}></td>
+                        <th colSpan={2}>Cargo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Usuarios.map((user) => {
                         return (
-                            <tr key={user.id}>
+                            <tr key={user.id} className='align-middle'>
                                 <td>{user.id}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
                                 
-                                    <td>
-                                        <Button  variant='outline-primary' onClick={() => navigate(`/editlist/${user.id}`)}>Editar</Button>
-                                        <Button variant='outline-danger'>Deletar</Button>
-                                    </td>
+                                    <td className='text-center'>
+                                        <Button className='mx-2' variant='outline-primary' onClick={() => navigate(`/editlist/${user.id}`)}>Editar</Button>
+                                        <Button variant='outline-danger' onClick={() => deleteUser(user.id)}>Deletar</Button>                                    </td>
                             </tr>
                         )
                     })}
